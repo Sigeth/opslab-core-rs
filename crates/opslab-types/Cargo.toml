@@ -1,0 +1,22 @@
+[package]
+name = "opslab-types"
+description = "Rust types of the opslab custom resources, generated from opslab-core-go"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+k8s-openapi = { version = "0.29", default-features = false, features = ["std"] }
+kube = { version = "5", default-features = false, features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[features]
+# k8s-openapi requires exactly one Kubernetes version feature, chosen by the
+# final binary. This one is for building and testing this crate on its own.
+k8s-latest = ["k8s-openapi/latest"]
+
+[lints]
+workspace = true
