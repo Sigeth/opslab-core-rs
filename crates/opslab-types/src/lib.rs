@@ -34,12 +34,36 @@ pub mod project {
     pub const PLATFORM_CONFIG_NAME: &str = "default";
 }
 
+/// Conventions shared with opslab-core-go that are not part of the CRDs.
+pub mod conventions {
+    /// Container running a pod or sysbox machine, inside the pod named by
+    /// the machine status. Mirrors `v1alpha1.MachineContainer`.
+    pub const MACHINE_CONTAINER: &str = "machine";
+    /// Instructions shown when no other language matches. Mirrors
+    /// `challenge.DefaultInstructions`.
+    pub const DEFAULT_INSTRUCTIONS: &str = "instructions/en.md";
+
+    /// Key of a package file in a ConfigMap ('/' becomes "__"). Mirrors
+    /// `challenge.ConfigMapKey`.
+    pub fn config_map_key(path: &str) -> String {
+        path.replace('/', "__")
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use kube::Resource;
 
     use super::generated::challengeinstances::{ChallengeInstanceOwner, ChallengeInstanceSpec};
     use super::*;
+
+    #[test]
+    fn config_map_keys() {
+        assert_eq!(
+            conventions::config_map_key(conventions::DEFAULT_INSTRUCTIONS),
+            "instructions__en.md"
+        );
+    }
 
     #[test]
     fn resource_metadata_matches_crds() {

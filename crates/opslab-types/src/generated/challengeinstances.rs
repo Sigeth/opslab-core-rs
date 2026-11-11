@@ -100,6 +100,10 @@ pub struct ChallengeInstanceStatusMachines {
     pub address: Option<String>,
     /// Name of the machine.
     pub name: String,
+    /// Pod running the machine, in the instance namespace (pod and sysbox
+    /// runtimes). Terminals and checks exec into its MachineContainer.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub pod: Option<String>,
     /// Ready is true when the machine is up and its setup completed.
     pub ready: bool,
     /// Runtime of the machine.
