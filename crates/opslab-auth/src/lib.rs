@@ -30,9 +30,13 @@ use std::time::{Duration, SystemTime, UNIX_EPOCH};
 use ed25519_dalek::SigningKey;
 use ed25519_dalek::pkcs8::spki::der::pem::LineEnding;
 use ed25519_dalek::pkcs8::{DecodePrivateKey, EncodePrivateKey, KeypairBytes};
-use jsonwebtoken::jwk::{Jwk, JwkSet};
+use jsonwebtoken::jwk::Jwk;
 use jsonwebtoken::{Algorithm, DecodingKey, EncodingKey, Header, Validation};
 use serde::{Deserialize, Serialize};
+
+/// The JWKS document type, re-exported so consumers do not need to depend on
+/// (and keep in sync with) the same jsonwebtoken version.
+pub use jsonwebtoken::jwk::JwkSet;
 
 /// Issuer of every access token.
 pub const ISSUER: &str = "opslab-api";
