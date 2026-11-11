@@ -1,0 +1,20 @@
+[package]
+name = "opslab-auth"
+description = "Short-lived access tokens minted by the opslab api and verified by the gateway"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+ed25519-dalek = { version = "3", features = ["pkcs8", "pem"] }
+getrandom = "0.3"
+jsonwebtoken = { version = "11", default-features = false, features = ["rust_crypto"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+uuid = { version = "1", features = ["v4"] }
