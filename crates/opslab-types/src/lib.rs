@@ -43,6 +43,21 @@ pub mod conventions {
     /// `challenge.DefaultInstructions`.
     pub const DEFAULT_INSTRUCTIONS: &str = "instructions/en.md";
 
+    /// Port where vm machines accept SSH. Mirrors `v1alpha1.SSHPort`.
+    pub const SSH_PORT: u16 = 22;
+    /// Account of the student on vm machines (terminals log in as it).
+    /// Mirrors `v1alpha1.StudentUser`.
+    pub const STUDENT_USER: &str = "student";
+    /// Secret of an instance namespace holding its SSH material. Mirrors
+    /// `v1alpha1.SSHSecret`.
+    pub const SSH_SECRET: &str = "opslab-ssh";
+    /// Key of [`SSH_SECRET`] holding the student's private key (OpenSSH PEM).
+    /// Mirrors `v1alpha1.SSHSecretStudentKey`.
+    pub const SSH_SECRET_STUDENT_KEY: &str = "student";
+    /// Key of [`SSH_SECRET`] holding the machines' host keys, in known_hosts
+    /// format by machine address. Mirrors `v1alpha1.SSHSecretKnownHosts`.
+    pub const SSH_SECRET_KNOWN_HOSTS: &str = "known_hosts";
+
     /// Key of a package file in a ConfigMap ('/' becomes "__"). Mirrors
     /// `challenge.ConfigMapKey`.
     pub fn config_map_key(path: &str) -> String {
