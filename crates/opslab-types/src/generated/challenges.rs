@@ -668,6 +668,15 @@ pub struct ChallengeStatus {
     /// Digest of the installed package artifact. New instances use it.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub digest: Option<String>,
+    /// FilesConfigMap is the ConfigMap, in the operator namespace, holding the
+    /// files of the installed package (keys as in InlinePackage.FilesConfigMap).
+    /// Its PackageDigestAnnotation equals Digest once the files are in place.
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "filesConfigMap"
+    )]
+    pub files_config_map: Option<String>,
     /// Mirrored is true when the package and its images are in the in-cluster registry.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub mirrored: Option<bool>,
